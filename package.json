@@ -2,6 +2,7 @@
   "name": "ai-news-studio",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://IsratJahanRaka.github.io/media-in-time-card/",
   "dependencies": {
     "html2canvas": "^1.4.1",
     "react": "^18.0.0",
