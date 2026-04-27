@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/media-in-time-card/static/css/main.d8fbb9bb.css",
+    "main.js": "/media-in-time-card/static/js/main.cdb67107.js",
+    "static/media/bg.png": "/media-in-time-card/static/media/bg.bd0d926f4280bd426ab4.png",
+    "static/media/Ads 4.png": "/media-in-time-card/static/media/Ads 4.ea898bbac2ef73712d61.png",
+    "static/media/Ads 3.png": "/media-in-time-card/static/media/Ads 3.aef9b41676494941cb21.png",
+    "static/media/Ads 1.png": "/media-in-time-card/static/media/Ads 1.becf6948df16c41b606a.png",
+    "static/media/Ads 2.png": "/media-in-time-card/static/media/Ads 2.fccdf6601c33beba7577.png",
+    "static/media/Asset 6.png": "/media-in-time-card/static/media/Asset 6.452477c22b894fad46b0.png",
+    "static/media/Asset 5.png": "/media-in-time-card/static/media/Asset 5.53c6d4765ea96df7dec0.png",
+    "static/media/Asset 7.png": "/media-in-time-card/static/media/Asset 7.aabc6a175cd1034978b2.png",
+    "index.html": "/media-in-time-card/index.html",
+    "main.d8fbb9bb.css.map": "/media-in-time-card/static/css/main.d8fbb9bb.css.map",
+    "main.cdb67107.js.map": "/media-in-time-card/static/js/main.cdb67107.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8fbb9bb.css",
+    "static/js/main.cdb67107.js"
+  ]
+}
