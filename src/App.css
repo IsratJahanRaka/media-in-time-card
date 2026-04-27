@@ -75,8 +75,26 @@ body {
 }
 
 .btn-primary { background-color: var(--primary-red); color: white; }
-.btn-gold { background-color: var(--accent-gold); color: black; }
-.btn:hover { opacity: 0.9; }
+.btn-gold { 
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%); 
+  color: black; 
+  box-shadow: 0 4px 10px rgba(250, 204, 21, 0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn:hover { 
+  opacity: 1; 
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn:disabled {
+  background: #4b5563;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
 
 /* Ad Selection Grid */
 .ad-grid {

@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from "react";
 import html2canvas from "html2canvas";
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './utils/cropImage';
+import EPaper from "./EPaper";
 import "./App.css";
 
 // Assets - Background
@@ -29,6 +30,7 @@ const days = Array.from({ length: 31 }, (_, i) => i + 1);
 const years = Array.from({ length: 11 }, (_, i) => 2024 + i); // 2024 to 2034, user asked till 2030 but more is better
 
 export default function App() {
+  const [view, setView] = useState("card"); // "card" or "epaper"
   const [title, setTitle] = useState("এক সংবাদ বহু কপি অভিভাবকদের\nবক্তব্যেেই ছড়াল বিশৃঙ্খলা");
   const [category, setCategory] = useState("জাতীয়");
   
@@ -60,8 +62,8 @@ export default function App() {
   const [currentLogo, setCurrentLogo] = useState(logo1);
   const [midLogo, setMidLogo] = useState(logo2);
   const [currentAd, setCurrentAd] = useState(ad1);
-
   const cardRef = useRef();
+
 
   const onCropComplete = useCallback((_ , croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -103,6 +105,8 @@ export default function App() {
     link.click();
   };
 
+
+
   const renderTitle = () => {
     const lines = title.split("\n");
     let line1 = lines[0];
@@ -122,6 +126,10 @@ export default function App() {
       </div>
     );
   };
+
+  if (view === "epaper") {
+    return <EPaper onBack={() => setView("card")} />;
+  }
 
   return (
     <div className="app-container">
@@ -147,8 +155,14 @@ export default function App() {
       )}
 
       <aside className="sidebar">
+        <div style={{display: 'flex', gap: '10px', marginBottom: '20px'}}>
+           <button className={`btn ${view === 'card' ? 'btn-gold' : 'btn-primary'}`} onClick={() => setView('card')}>Card Maker</button>
+           <button className={`btn ${view === 'epaper' ? 'btn-gold' : 'btn-primary'}`} onClick={() => setView('epaper')}>ePaper Maker</button>
+        </div>
+
         <h2>News Post Maker</h2>
         
+
         <div className="control-group">
           <label>Headline</label>
           <textarea className="input-field" rows="3" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -233,7 +247,7 @@ export default function App() {
           </div>
         </div>
 
-        <button className="btn btn-primary" onClick={handleDownload} style={{marginTop: '20px'}}>Download Post</button>
+        <button className="btn btn-primary" onClick={handleDownload} style={{marginTop: '20px'}}>Download Post Card</button>
       </aside>
 
       <main className="preview-area">
