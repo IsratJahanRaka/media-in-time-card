@@ -155,9 +155,9 @@ export default function App() {
       )}
 
       <aside className="sidebar">
-        <div style={{display: 'flex', gap: '10px', marginBottom: '20px'}}>
-           <button className={`btn ${view === 'card' ? 'btn-gold' : 'btn-primary'}`} onClick={() => setView('card')}>Card Maker</button>
-           <button className={`btn ${view === 'epaper' ? 'btn-gold' : 'btn-primary'}`} onClick={() => setView('epaper')}>ePaper Maker</button>
+        <div style={{display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap'}}>
+           <button className={`btn ${view === 'card' ? 'btn-gold' : 'btn-primary'}`} style={{flex: '1 1 45%', fontSize: '12px'}} onClick={() => setView('card')}>Card Maker</button>
+           <button className={`btn ${view === 'epaper' ? 'btn-gold' : 'btn-primary'}`} style={{flex: '1 1 45%', fontSize: '12px'}} onClick={() => setView('epaper')}>ePaper Maker</button>
         </div>
 
         <h2>News Post Maker</h2>

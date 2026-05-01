@@ -114,26 +114,17 @@ export default function EPaper({ onBack }) {
 
   const [ads, setAds] = useState({
     banner: bannerAdDemo,
-    side: sideAdDemo,
     box: boxAdDemo,
-    poster: sideAdDemo,
     footer: footerAdDemo,
     // Story-specific ads
     story2: boxAdDemo,
-    story3: boxAdDemo,
-    story4: boxAdDemo,
-    story5: boxAdDemo,
-    story6: boxAdDemo,
-    story7: boxAdDemo,
-    story8: boxAdDemo,
-    story9: boxAdDemo,
-    story10: boxAdDemo
+    story3: boxAdDemo
   });
 
-  const [stories, setStories] = useState(Array.from({ length: 10 }, (_, i) => ({
+  const [stories, setStories] = useState(Array.from({ length: 5 }, (_, i) => ({
     id: i + 1,
     title: i === 0 ? "গরমে আরাম লুকে গ্ল্যামার" : `নিউজ টাইটেল ${i + 1}`,
-    content: i === 0 ? "রোজের তাপ দিনকে দিন বাড়তেই হচ্ছে হয়ে খুঁজতে সবাই একটুখানি আরাম। কী পরলে মিলবে এক পশলা শীতলতা? এদিকে ক্যাজুয়ালও হওয়া চাই ফ্যাশনেবল।" : `এখানে আপনার খবরের বিস্তারিত তথ্য লিখুন। এটি ১০টি নিউজের মধ্যে একটি যা আপনি ইচ্ছামতো পরিবর্তন করতে পারবেন।`,
+    content: i === 0 ? "রোজের তাপ দিনকে দিন বাড়তেই হচ্ছে হয়ে খুঁজতে সবাই একটুখানি আরাম। কী পরলে মিলবে এক পশলা শীতলতা? এদিকে ক্যাজুয়ালও হওয়া চাই ফ্যাশনেবল।" : `এখানে আপনার খবরের বিস্তারিত তথ্য লিখুন। এটি ৫টি নিউজের মধ্যে একটি যা আপনি ইচ্ছামতো পরিবর্তন করতে পারবেন।`,
     image: i === 0 ? mainDemoImg : (i === 1 ? boyImg : (i === 3 ? fruitImg : null)),
     credit: "ছবি: মিডিয়া ইন টাইম",
   })));
@@ -163,7 +154,8 @@ export default function EPaper({ onBack }) {
   };
 
   const downloadPaper = async () => {
-    const canvas = await html2canvas(paperRef.current, { scale: 2, useCORS: true });
+    // 1056px * 6.366 = ~6723px width
+    const canvas = await html2canvas(paperRef.current, { scale: 6.366, useCORS: true });
     const link = document.createElement("a");
     link.download = `EPaper_${category}_P${pageNumber}_${Date.now()}.png`;
     link.href = canvas.toDataURL();
@@ -173,9 +165,8 @@ export default function EPaper({ onBack }) {
   const downloadFB = async () => {
     // Capturing the FULL page but optimized for Facebook (1080px width)
     const canvas = await html2canvas(paperRef.current, {
-      scale: 2.5,
+      scale: 6.366, // 1056px layout * 6.366 = 6723px downloaded image
       useCORS: true,
-      width: 1000, // The container is 1000px, scale 2.5 makes it 2500px, FB will downscale nicely
       scrollX: 0,
       scrollY: -window.scrollY
     });
@@ -282,7 +273,7 @@ export default function EPaper({ onBack }) {
           ))}
         </div>
 
-        <h2 style={{ color: '#eab308', margin: '20px 0 10px 0' }}>10 News Stories</h2>
+        <h2 style={{ color: '#eab308', margin: '20px 0 10px 0' }}>5 News Stories</h2>
         <div className="story-editor-list" style={{ maxHeight: '20vh' }}>
           {stories.map((story, idx) => (
             <div key={story.id} className="story-editor-card">
@@ -370,7 +361,8 @@ export default function EPaper({ onBack }) {
             </div>
           )}
 
-          <div className="news-grid-container">
+          <div className="main-content-layout">
+            <div className="news-grid-container">
             {stories.map((s, idx) => (
               <div key={s.id} className={`story-ad-wrapper block-${idx + 1}`}>
                 <article className="news-block">
@@ -394,8 +386,8 @@ export default function EPaper({ onBack }) {
                   )}
                 </article>
 
-                {/* Inline ads from Story 2 onwards */}
-                {idx >= 1 && (
+                {/* Inline ads from Story 2 and 3 */}
+                {idx >= 1 && idx <= 2 && (
                   <div className="news-inline-ad">
                     <div className="ad-image-container-small">
                       <img src={ads[`story${idx + 1}`]} alt={`Ad ${idx + 1}`} />
@@ -405,13 +397,6 @@ export default function EPaper({ onBack }) {
                 )}
               </div>
             ))}
-
-            {/* Poster Ad next to Story 10 */}
-            <div className="story-ad-wrapper poster-ad-block">
-              <div className="paper-ad poster-ad-full">
-                <img src={ads.poster} alt="Poster Ad" />
-                <div className="ad-size-label">Size: 450x600px</div>
-              </div>
             </div>
           </div>
 

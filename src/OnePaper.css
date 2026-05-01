@@ -1,0 +1,267 @@
+.onepaper-app {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  min-height: 100vh;
+  background-color: var(--dark-bg);
+  color: var(--text-white);
+}
+
+.paper-preview-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  padding: 40px;
+  overflow: auto;
+}
+
+/* The actual canvas */
+.onepaper-canvas {
+  width: 1920px;
+  height: 1080px;
+  background: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  font-family: 'SolaimanLipi', 'Hind Siliguri', sans-serif;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  transform: scale(0.45);
+  transform-origin: top left;
+}
+
+/* Because of transform scale, the container needs specific dimensions so scrolling works */
+.paper-preview-area {
+  display: block;
+  background: #000;
+  padding: 40px;
+  overflow: auto;
+  min-height: 600px;
+}
+
+/* Top Section */
+.op-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 40px 60px;
+  height: 300px;
+}
+
+.op-logo-container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.op-logo {
+  width: 280px;
+  height: auto;
+}
+
+.op-headline-container {
+  flex: 1;
+  padding: 30px 40px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  border-left: 8px solid #e31837;
+  border-radius: 0 16px 16px 0;
+  box-shadow: 4px 4px 20px rgba(0,0,0,0.08);
+}
+
+.op-headline {
+  color: #e31837;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.op-subheadline {
+  color: #000;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Main Content Area */
+.op-main-content {
+  display: flex;
+  flex: 1;
+  position: relative;
+  height: 780px; /* 1080px (canvas) - 300px (header) to force strict bounds */
+}
+
+/* Left Image Area */
+.op-left-image-area {
+  width: 700px;
+  height: 100%; /* Image extends all the way to the bottom of the canvas */
+  position: relative;
+  overflow: hidden;
+}
+
+.op-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Group for text overlay at the bottom corner of the image */
+.op-image-overlay-text {
+  position: absolute;
+  bottom: 100px; /* Moved up to avoid overlapping with the footer ad space */
+  right: 30px;
+  text-align: right;
+  width: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 5;
+}
+
+.op-intro-text {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0,0,0,1), -1px -1px 4px rgba(0,0,0,1);
+  max-width: 95%;
+}
+
+.op-image-caption {
+  color: #e31837;
+  font-size: 38px;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(255,255,255,0.9), -2px -2px 4px rgba(255,255,255,0.9);
+}
+
+/* Right Content Area */
+.op-right-text-area {
+  flex: 1;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: calc(100% - 130px); /* Strictly ends 130px before bottom (footer is 120px + 10px gap) */
+  overflow: hidden;
+}
+
+.op-desk-name {
+  font-size: 38px;
+  font-weight: 900;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+.op-desk-name span {
+  font-size: 30px;
+}
+
+.op-columns {
+  display: flex;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.op-column {
+  flex: 1;
+  font-size: 19px;
+  line-height: 1.5;
+  color: #000;
+  text-align: justify;
+  font-weight: 500;
+}
+
+.op-column p {
+  margin-bottom: 15px;
+}
+
+/* Watermark */
+.op-watermark {
+  position: absolute;
+  top: 55%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  color: rgba(227, 24, 55, 0.04); /* extremely faint red */
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 0.9;
+}
+
+/* Split Footer */
+.op-footer-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px; /* Made significantly taller for a large ad */
+  display: flex;
+  z-index: 10;
+}
+
+.op-footer-ad-section {
+  width: 700px; /* Exactly matches the left image area width */
+  height: 100%;
+  background-color: transparent; /* No white background */
+  display: flex;
+  justify-content: flex-end; /* Aligns ad exactly next to the red social section */
+  align-items: center;
+  padding-right: 0; /* Ensures it touches the social section without gap */
+  border-top: none; /* No border */
+}
+
+.op-footer-social-section {
+  flex: 1;
+  background-color: #e31837;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 60px;
+  color: white;
+}
+
+.op-socials {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.op-social-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.op-social-icon {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  color: #e31837;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+}
+
+.op-social-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
